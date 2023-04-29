@@ -23,9 +23,6 @@
 		],
 		"post-install-cmd": [
 			"sed -i s/name{0}/name[0]/ vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php"
-		],
-		"post-update-cmd": [
-			"sed -i s/name{0}/name[0]/ vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php"
 		]
 	},
 	"require-dev": {
