@@ -1,3 +1,12 @@
+
+how to deploy to heroku
+1 - copy composer files from php starter files:
+2 - add procfile: web: heroku-php-apache2
+3 - remove deprecation warnings:
+BY SEAN EIDREF D NATIVIDAD
+
+
+
 ###################
 What is CodeIgniter
 ###################
