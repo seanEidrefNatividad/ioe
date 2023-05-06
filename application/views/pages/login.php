@@ -20,7 +20,9 @@
 				<!-- Button trigger register_modal -->
 				<button id="register_btn" type="button" class="login_btn btn btn-success" data-bs-toggle="modal"
 					data-bs-target="#register_modal">
-					Create new account
+					<a href="<?=base_url().'register'?>">
+						Create new account
+					</a>
 				</button>
 
 			</div>
