@@ -1,68 +1,55 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends CI_Controller
+{
 	public function index()
 	{
-		$page = "login";
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
 
-        if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
-            show_404();
-        }
+		if ($this->form_validation->run() == FALSE) {
 
-		$data['flashdata'] = $this->load->view('templates/flashdata', NULL, TRUE);
+			$page = "login";
 
-        $this->load->view('templates/header');
-		$this->load->view('pages/'.$page, $data);
-		$this->load->view('templates/footer');
-	}
-	public function login() {
-		// $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-		// $this->form_validation->set_rules('email', 'Email', 'required');
-		// $this->form_validation->set_rules('password', 'Password', 'required');
+			if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
+				show_404();
+			}
 
-		redirect(base_url()."success");
+			$data['flashdata'] = $this->load->view('templates/flashdata', NULL, TRUE);
 
+			$this->load->view('templates/header');
+			$this->load->view('pages/' . $page, $data);
+			$this->load->view('templates/footer');
 
-		// if ($this->form_validation->run() == FALSE) {
+		} else {
+			$result = $this->Home_model->login();
+			$this->session->set_flashdata('loggedIn', 'Logged In Successfully');
 
-		// 	$page = "login";
+			// print_r($result);
+			// exit;
 
-		// 	if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
-		// 		show_404();
-		// 	}
+			if ($result) {
+				$newdata = array(
+					'email' => $result['Email_Address'],
+					'logged_in' => TRUE,
+					'id' => $result['ID']
+				);
 
-		// 	redirect(base_url());
+				$this->session->set_userdata($newdata);
 
-		// 	// $this->load->view('templates/header');
-		// 	// $this->load->view('pages/' . $page);
-		// 	// $this->load->view('templates/footer');
+				redirect(base_url() . "home");
+			} else {
+				$array_items = array('email', 'logged_in', 'username');
+				$this->session->unset_userdata($array_items);
+				$this->session->set_flashdata('WrongLogIn', 'Wrong email and password');
 
-		// } else {
-		// 	$result = $this->Home_model->login();
-		// 	//$this->session->set_flashdata('loggedIn', 'Logged In Successfully');
+				redirect(base_url());
+			}		
 
-		// 	// if ($result) {
-		// 	//     $newdata = array(
-		// 	//         'email' => $result['email'],
-		// 	//         'logged_in' => TRUE,
-		// 	//         'username' => $result['username']
-		// 	//     );
-
-		// 	//     $this->session->set_userdata($newdata);
-		// 	// } else {
-		// 	//     $array_items = array('email', 'logged_in', 'username');
-		// 	//     $this->session->unset_userdata($array_items);
-
-		// 	//     $this->session->set_flashdata('WrongLogIn', 'Wrong email and password');
-		// 	// }
-		// 	redirect(base_url()."success");
-
-
-		// }
+		}
 
 	}
-	public function success() {
-		redirect(base_url()."home");
-	}
+
 }

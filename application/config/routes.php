@@ -55,11 +55,12 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['register'] = 'Register/index';
 
-$route['login'] = 'Login/login';
 $route['success'] = 'Login/success';
 
 $route['home'] = 'Home/index';
 $route['profile'] = 'Home/profile';
+$route['logout'] = 'Home/logout';
+
 
 
 

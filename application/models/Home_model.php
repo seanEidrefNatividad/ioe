@@ -12,6 +12,27 @@ class Home_model extends CI_Model
         $query = $this->db->get('users');
         return $query->row_array();
     }
+    public function login()
+    {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $this->db->where('Email_Address', $email);
+        $query = $this->db->get('users');
+        $userExist = $query->row_array();
+
+        $pwdHashed = $userExist["Password"];
+        $checkPwd = password_verify($password, $pwdHashed);
+
+        if ($checkPwd) {
+            $this->db->where('Email_Address', $email);
+            $query = $this->db->get('users');
+            return $query->row_array();
+
+        } else {
+            return false;
+        }
+    }
     public function register()
     {
         $firstName = $this->input->post('firstName');
