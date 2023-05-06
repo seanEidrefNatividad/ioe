@@ -57,5 +57,7 @@ $route['login'] = 'Login/login';
 $route['success'] = 'Login/success';
 
 $route['home'] = 'Home/index';
+$route['profile'] = 'Home/profile';
+
 
 
