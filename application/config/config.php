@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'https://ci3.herokuapp.com/';
-$config['base_url'] = 'http://localhost/ioe/';
+$config['base_url'] = 'https://scentinel-v1.herokuapp.com/';
+//$config['base_url'] = 'http://localhost/ioe/';
 
 
 /*
