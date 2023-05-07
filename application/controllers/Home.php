@@ -29,8 +29,11 @@ class Home extends CI_Controller
             }
 
             $data['page'] = $page;
-            // $data['usertype'] = $this->session->usertype; // "1" = enduser, else Admin
-            $data['usertype'] = ""; // "1" = enduser, else Admin
+            
+            // if usertype = "1". then enduser, else Admin
+            // $data['usertype'] = $this->session->usertype; // Enduser
+            $data['usertype'] = ""; // Admin
+
             $data['headerNav'] = $this->load->view('templates/headerNav', NULL, TRUE);
             $data['sidebarNav'] = $this->load->view('templates/sidebarNav', $data, TRUE);
 
