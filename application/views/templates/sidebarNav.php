@@ -1,8 +1,10 @@
-<div style="width: 200px; height: 100vh; background-color: green; position: fixed; z-index: 2; border: 1px solid violet; padding-top: 60px;">
-
-<ul>
-    <li><button><a href="<?=base_url().'profile'?>">Profile</a></button></li>
-    <li><button><a href="<?=base_url().'home'?>">Home</a></button> </li>
-</ul>
-
+<div id="sidebarNav">
+    <ul>
+        <li><button><a href="<?= base_url() . 'i/profile' ?>">Profile</a></button></li>
+        <?php if ($usertype == 1) { ?>
+            <li><button><a href="<?= base_url() . 'i/task' ?>">Task</a></button> </li>
+        <?php } else { ?>
+            <li><button><a href="<?= base_url() . 'i/analytics' ?>">Analytics</a></button> </li>
+        <?php } ?>
+    </ul>
 </div>

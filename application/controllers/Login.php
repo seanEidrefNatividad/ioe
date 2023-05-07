@@ -32,16 +32,16 @@ class Login extends CI_Controller
 
 			if ($result) {
 				$newdata = array(
-					'email' => $result['Email_Address'],
+					'id' => $result['ID'],
+					'usertype' => $result['User_Type'],
 					'logged_in' => TRUE,
-					'id' => $result['ID']
 				);
 
 				$this->session->set_userdata($newdata);
 
-				redirect(base_url() . "home");
+				redirect(base_url() . "i/profile");
 			} else {
-				$array_items = array('email', 'logged_in', 'username');
+				$array_items = array('id', 'usertype', 'logged_in');
 				$this->session->unset_userdata($array_items);
 				$this->session->set_flashdata('WrongLogIn', 'Wrong email and password');
 

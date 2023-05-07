@@ -105,9 +105,6 @@ a {
     height: 70vh;
     overflow: auto;
 }
-h1 {
-    font-size: 5rem;
-}
 
 .imageDiv {
     height: 225px; 
@@ -351,6 +348,7 @@ h1 {
 }
 
 
+
 .profileImg {
     width: 45px; 
     height: 45px; 
@@ -397,10 +395,65 @@ h1 {
       .zero {
         height: auto;
       }
-@media (min-width: 1400px) {  
-    .navLbl {
-        display: inline;
+
+
+
+
+#mainPage {
+    border: 1px solid black; 
+    padding-top: 60px; 
+}
+
+#sidebarNav {
+    position: fixed; 
+    z-index: 2; 
+    top:0;
+    left: 0;
+    height: 100vh;
+    padding-top: 60px;   
+    color: white;
+    background-color: #242526;  
+    border-right-style: solid;
+    border-width: 1px;
+    border-color:#3a3b3c;   
+}
+
+@media (max-width: 4000px) {
+
+    #sidebarNav {
+        width: 300px;
+    }  
+    #mainPage {
+        margin-left: 300px;
     }
+}
+@media (max-width: 2000px) { 
+
+}
+@media (max-width: 1399px) { 
+    
+}
+@media (max-width: 1199px){ 
+   
+}
+@media (max-width: 991px) {
+
+}
+@media (max-width: 767px) {
+    #sidebarNav {
+        width: 70px;
+    }
+    #mainPage {
+        margin-left: 70px;
+    }
+}
+@media (max-width: 575px) {
+
+}
+
+
+/* @media (min-width: 1400px) {  
+
 }
 @media (min-width: 1200px) and (max-width: 1399px) { 
     
@@ -409,32 +462,20 @@ h1 {
 
 }
 @media (min-width: 768px) and (max-width: 991px){
-    /* .flex-container1 {
-        padding-left: 69px;
-    } */
+
 }
 @media (min-width: 576px) and (max-width: 767px){
-    #sideProfile {
-        display: none;
-    }
-    #side1 {
-        display: none;
-    }
+
 }
 @media (max-width: 575px) {
-    #sideProfile {
-        display: none;
-    }
-    #side1 {
-        display: none;
-    }
-}
+
+} */
 
 
 
 
 
-@media (max-width: 4000px) {
+/* @media (max-width: 4000px) {
     .flex-container1 {
       width: 100%;
       display: flex;
@@ -543,7 +584,7 @@ h1 {
 }
 @media (max-width: 575px) {
 
-}
+} */
 
 
 

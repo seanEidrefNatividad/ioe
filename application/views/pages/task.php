@@ -6,11 +6,6 @@
 		<?= $page ?>
 	</h1>
 	<div id="body">
-		<?php if ($usertype == 1) { ?>
-			<span>User type: End-user</span>
-		<?php } else { ?>
-			<span>User type: Admin</span>
-		<?php } ?>
 	</div>
 </div>
 

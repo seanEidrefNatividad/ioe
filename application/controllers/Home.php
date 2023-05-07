@@ -3,17 +3,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends CI_Controller
 {
-    public function index()
+    public function index($path)
     {
         if ($this->session->has_userdata('logged_in')) {
-            $page = "home";
 
-            if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
+            $page = $path;
+
+            if (!file_exists(APPPATH . 'views/pages/' . $page . '.php') && $path != "logout") {
                 show_404();
             }
 
+            switch($page) {
+                case "profile":
+                    //do something
+                    break;
+                case "analytics":
+                    //do something, get database
+                    break;
+                case "task":
+                    //do something, get database
+                    break;
+                case "logout":
+                    $this->logout();
+                    break;
+            }
+
+            $data['page'] = $page;
+            // $data['usertype'] = $this->session->usertype; // "1" = enduser, else Admin
+            $data['usertype'] = ""; // "1" = enduser, else Admin
             $data['headerNav'] = $this->load->view('templates/headerNav', NULL, TRUE);
-            $data['sidebarNav'] = $this->load->view('templates/sidebarNav', NULL, TRUE);
+            $data['sidebarNav'] = $this->load->view('templates/sidebarNav', $data, TRUE);
 
             $this->load->view('templates/header');
             $this->load->view('pages/' . $page, $data);
@@ -22,30 +41,11 @@ class Home extends CI_Controller
             redirect(base_url());
         }
     }
-    public function profile()
-    {
-        if ($this->session->has_userdata('logged_in')) {
-            $page = "home";
-            $page = "profile";
-
-            if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
-                show_404();
-            }
-
-            $data['headerNav'] = $this->load->view('templates/headerNav', NULL, TRUE);
-            $data['sidebarNav'] = $this->load->view('templates/sidebarNav', NULL, TRUE);
-
-            $this->load->view('templates/header');
-            $this->load->view('pages/' . $page, $data);
-            $this->load->view('templates/footer');
-        } else {
-            redirect(base_url());
-        }
-    }
-    public function logout()
-    {
-        $array_items = array('email', 'logged_in', 'username');
+    private function logout()
+    {   
+        $array_items = array('id', 'usertype', 'logged_in');
         $this->session->unset_userdata($array_items);
-        redirect(base_url());
+        redirect(base_url());  
     }
+       
 }

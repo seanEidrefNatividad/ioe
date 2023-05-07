@@ -54,12 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['register'] = 'Register/index';
-
-$route['success'] = 'Login/success';
-
-$route['home'] = 'Home/index';
-$route['profile'] = 'Home/profile';
-$route['logout'] = 'Home/logout';
+$route['i/(:any)'] = 'Home/index/$1';
 
 
 
