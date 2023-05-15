@@ -55,6 +55,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['register'] = 'Register/index';
 $route['i/(:any)'] = 'Home/index/$1';
+$route['api'] = 'Api/index/';
+$route['api/home'] = 'Api/home';
+
+
 
 
 
