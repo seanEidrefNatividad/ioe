@@ -22,6 +22,9 @@ class Home extends CI_Controller
                     break;
                 case "task":
                     //do something, get database
+                    // $data['result'] = $this->Home_model->login();
+
+
                     break;
                 case "logout":
                     $this->logout();
