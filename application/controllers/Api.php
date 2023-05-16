@@ -46,7 +46,7 @@ class Api extends CI_Controller {
 		// }
 		$data['Sensor_Name'] = $this->input->post('Sensor_Name');
 		$data['Sensor_Location'] = $this->input->post('Sensor_Location');
-		$data['valuSensor_Valuee'] = $this->input->post('Sensor_Value');
+		$data['Sensor_Value'] = $this->input->post('Sensor_Value');
 		$this->api_model->updateValue($data);
 		echo json_encode($data);
 		// return $data;
