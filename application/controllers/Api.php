@@ -61,10 +61,27 @@ class Api extends CI_Controller {
         echo json_encode($value);
     }
 
-	// public function viewSensor()
-	// {
+	public function newTask() {
 
-	// }
+		$page = 'newTask';
+		// $result = $this->api_model->getVal();		
+		// $data['result'] = $result["Sensor_value"];
+
+		// echo $result["Sensor_value"];
+		// exit;
+
+		$this->load->view('templates/header');
+		$this->load->view('pages/' . $page);
+		$this->load->view('templates/footer');	
+	}	
+
+	public function newTask2() {
+
+		$page = 'newTask';
+		$result = $this->api_model->getVal();	
+		echo $result["Sensor_value"];
+		return json_encode($result["Sensor_value"]);
+	}	
 	
 }
 
