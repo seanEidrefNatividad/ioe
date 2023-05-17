@@ -38,6 +38,7 @@ let task = false;
                     $("body").append("<br>")
                     $("body").append("PENDING TASK - " +" average: " + average.toFixed(2) +" values: "+ values.toString())
                     $("body").append("<br>")
+                    
                 }
                 
             } else {
