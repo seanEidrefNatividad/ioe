@@ -79,8 +79,8 @@ class Api extends CI_Controller {
 
 		$page = 'newTask';
 		$result = $this->api_model->getVal();	
-		echo $result["Sensor_value"];
-		return json_encode($result["Sensor_value"]);
+		echo $result["Sensor_Value"];
+		return json_encode($result["Sensor_Value"]);
 	}	
 	
 }
