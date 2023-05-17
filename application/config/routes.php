@@ -58,6 +58,8 @@ $route['i/(:any)'] = 'Home/index/$1';
 $route['api'] = 'Api/index/';
 $route['api/home'] = 'Api/home';
 $route['api/newTask'] = 'Api/newTask';
+$route['api/newTask2'] = 'Api/newTask2';
+
 
 
 
