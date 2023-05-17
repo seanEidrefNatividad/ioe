@@ -61,6 +61,12 @@ class Api extends CI_Controller {
         echo json_encode($value);
     }
 
+	public function newTask() {
+		$result = $this->api_model->getVal();
+		print_r($result);
+
+	}
+
 	// public function viewSensor()
 	// {
 
