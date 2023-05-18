@@ -23,13 +23,19 @@
 				text: "Sensor Value"
 			},
 			axisX: {
-				title: "Time"
+				title: "Time",
+				gridThickness: 2,
+				interval: 15,
+				intervalType: "minute",
+				labelAngle: -45
+
 			},
 			axisY: {
 				title: "PPM Levels"
 			},
 			data: [{
 				type: "line",
+				xValueType: "dateTime",
 				dataPoints: dataPoints
 			}]
 		});
@@ -43,7 +49,7 @@
 		function addData(data) {
 			if (newDataCount != 1) {
 				$.each(data, function (key, value) {
-					dataPoints.push({ x: value[0], y: parseInt(value[1]) });
+					dataPoints.push({ x: value[Date], y: parseInt(value[1]) });
 					xValue++;
 					yValue = parseInt(value[1]);
 				});
