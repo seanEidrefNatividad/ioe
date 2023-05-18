@@ -17,6 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?=base_url();?>css/style.css">
     <link rel="stylesheet" href="<?=base_url();?>css/headerNav.css">
     <link rel="stylesheet" href="<?=base_url();?>css/sidebarNav.css">
+    <link rel="stylesheet" href="<?=base_url();?>css/task.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 

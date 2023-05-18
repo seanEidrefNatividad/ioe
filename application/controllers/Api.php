@@ -162,6 +162,14 @@ class Api extends CI_Controller {
 
 		echo $response;
 	}
+	public function analytics()
+	{
+		$data1['yearlevel'] = $this->input->post('yearlevel');
+		// $data1['yearlevel'] = 1;
+		$total_enrollees = $this->Analytics_model->total_enrollees($data1);
+		echo json_encode($total_enrollees);
+	}
+
 	
 }
 

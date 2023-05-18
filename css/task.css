@@ -1,0 +1,7 @@
+#mainPage {
+    border: 0 !important;
+}
+
+#btn_completed:hover {
+    cursor: default;
+}
