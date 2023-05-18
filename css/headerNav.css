@@ -23,3 +23,21 @@
 .btn_headerNav:hover {
     border: solid #e3e7e7 3px;
 }
+
+#logoDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo {
+    width: 40px;
+    height: 40px;
+    margin-left: 1.5rem;
+}
+
+#logoName {
+    font-size: 1.5rem;
+    color: #00684a;
+
+}
