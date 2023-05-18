@@ -82,6 +82,88 @@ class Api extends CI_Controller {
 		echo $result["Sensor_value"];
 		return json_encode($result["Sensor_value"]);
 	}	
+
+	public function send_sms()
+	{
+
+		$destination = "09177864991";
+		$text = "message";
+		
+
+		$fields = array(
+
+			'mobile_number'=>urlencode($destination),
+
+			'message'=>urlencode($text)
+
+		);
+		
+		$fields_string = http_build_query($fields);
+
+		$fieldsString = "";
+
+		
+
+		// Create the fields string 
+
+		foreach($fields as $key=>$value) {
+
+			if (!empty($value))
+			{
+
+				$fieldsString .= $key.'='.$value.'&';
+
+			}
+
+		}
+
+		
+		$fieldsString = rtrim($fieldsString,'&');
+
+		echo $fieldsString."<br>";
+
+		//$url .= "?$fieldsString";
+
+		
+
+		$url = "https://stdominiccollege.edu.ph/smart_sms_evams/index.php/main/sms_send_api";
+
+		// Creates a CURL GET HTTP request
+
+		$ch = curl_init();
+
+		curl_setopt ($ch, CURLOPT_URL, $url);
+
+		curl_setopt($ch, CURLOPT_POST, 1);
+
+		//curl_setopt($ch, CURLOPT_POSTFIELDSIZE, 2);
+
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
+
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, true);
+
+		$response = curl_exec($ch);
+
+		curl_close($ch);
+
+		
+
+		echo "<strong>GET REQUEST URL:</strong><br/>";
+
+		echo $url;
+
+		echo "<br/><br/>";
+
+		
+
+		echo "<strong>RESPONSE:</strong><br/>";
+
+		$response = str_replace("\r\n", "<br/>", $response);
+
+		echo $response;
+	}
 	
 }
 

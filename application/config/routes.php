@@ -59,6 +59,8 @@ $route['api'] = 'Api/index/';
 $route['api/home'] = 'Api/home';
 $route['api/newTask'] = 'Api/newTask';
 $route['api/newTask2'] = 'Api/newTask2';
+$route['api/send_sms'] = 'Api/send_sms';
+
 
 
 
