@@ -24,7 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'https://scentinel.herokuapp.com/';
-$config['base_url'] = 'http://localhost/ioe/';
+//$config['base_url'] = 'http://localhost/ioe/';
+
+$config['base_url'] = 'https://stdominiccollege.edu.ph/scentinel';
+
 
 
 /*

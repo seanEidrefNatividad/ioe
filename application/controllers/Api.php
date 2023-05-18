@@ -77,7 +77,6 @@ class Api extends CI_Controller {
 
 	public function newTask2() {
 
-		$page = 'newTask';
 		$result = $this->api_model->getVal();	
 		echo $result["Sensor_value"];
 		return json_encode($result["Sensor_value"]);
@@ -85,7 +84,6 @@ class Api extends CI_Controller {
 
 	public function send_sms()
 	{
-
 		$destination = "09177864991";
 		$text = "message";
 		
