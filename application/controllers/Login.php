@@ -39,13 +39,13 @@ class Login extends CI_Controller
 
 				$this->session->set_userdata($newdata);
 
-				redirect(base_url() . "i/profile");
+				redirect(base_url() . "index.php/i/profile");
 			} else {
 				$array_items = array('id', 'usertype', 'logged_in');
 				$this->session->unset_userdata($array_items);
 				$this->session->set_flashdata('WrongLogIn', 'Wrong email and password');
 
-				redirect(base_url());
+				redirect(base_url(). "index.php/");
 			}		
 
 		}

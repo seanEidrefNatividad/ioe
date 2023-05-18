@@ -27,7 +27,7 @@ class Register extends CI_Controller {
         } else {
             $this->Home_model->register();
             $this->session->set_flashdata('registered', 'Successfully registered');
-            redirect(base_url());
+            redirect(base_url(). "index.php/");
         }
 	}
     public function email_check($str)

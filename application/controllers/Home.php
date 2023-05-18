@@ -41,14 +41,14 @@ class Home extends CI_Controller
             $this->load->view('pages/' . $page, $data);
             $this->load->view('templates/footer');
         } else {
-            redirect(base_url());
+            redirect(base_url(). "index.php/");
         }
     }
     private function logout()
     {   
         $array_items = array('id', 'usertype', 'logged_in');
         $this->session->unset_userdata($array_items);
-        redirect(base_url());  
+        redirect(base_url(). "index.php/");  
     }
        
 }
