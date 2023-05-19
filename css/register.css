@@ -1,0 +1,65 @@
+#registerDiv{
+    height: 100vh;
+    background-color: #fff;
+}
+
+#registerDiv2 {
+    background-color: red;
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+.lbl_register {
+    font-size: .85rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #4c5d65;
+}
+.tb_register {
+    border: 2px solid #dddfe2;
+    outline: none;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    display: block;
+    padding: .5rem;
+    width: 300px;
+}
+
+#btn_register {
+    margin-top: 80px;
+    padding: .5rem 1.25rem;
+    font-size: 1.15rem;
+}
+
+@media (max-width: 4000px) {
+    #registerDiv {
+        position: fixed;
+        top: 0;
+        left: 385px;
+        width: calc(100vw - 385px);
+        padding: 50px 0 50px 42px;
+    }
+    .tb_register {
+        width: 300px;
+        height: 40px;
+        padding: 1.5rem 1rem;
+    }
+}
+
+.tb_register:focus {
+    border: 2px solid rgb(58, 119, 252);
+}
+
+@media (max-width: 767px) {
+    #registerDiv {
+        margin-top: 60px;
+        left: 0;
+        width: 100%
+    }
+    .tb_register {
+        width: 90%;
+        height: 40px;
+        padding: 1.75rem 1.25rem;
+    }
+}
