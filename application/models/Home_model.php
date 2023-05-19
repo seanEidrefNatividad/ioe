@@ -18,20 +18,10 @@ class Home_model extends CI_Model
         $password = $this->input->post('password');
 
         $this->db->where('Email_Address', $email);
-        $query = $this->db->get('users');
-        $userExist = $query->row_array();
-
-        $pwdHashed = $userExist["Password"];
-        $checkPwd = password_verify($password, $pwdHashed);
-
-        if ($checkPwd) {
-            $this->db->where('Email_Address', $email);
-            $query = $this->db->get('users');
+        $query = $this->db->get('users');;
             return $query->row_array();
 
-        } else {
-            return false;
-        }
+        
     }
     public function register()
     {

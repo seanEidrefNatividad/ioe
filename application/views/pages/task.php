@@ -101,12 +101,16 @@
 
 <script>
 	$(document).ready(function () {
+		myProfile()
+		 
 		get_pending_tasks()
 
 		get_ongoing_tasks()
 
 		get_completed_tasks()
 	})
+
+	var global_full_name = '';
 
 	function myFunction(id) {
 		var x = document.getElementById(id);
@@ -117,6 +121,18 @@
 		}
 	}
 
+	function myProfile() {
+		$.ajax({
+			url: '<?=base_url('index.php/Task/getProfile')?>',
+			dataType: 'json',
+			success: function(data) {
+				global_full_name = data['Full_Name']
+			},
+			error: function(err) {
+				console.log(err)
+			}
+		})
+	}
 
 	function get_pending_tasks() {
 		$.ajax({
@@ -124,16 +140,18 @@
 			dataType: 'json',
 			success: function (data) {
 				
-				var html = "";
+				
 				for (var i = 0; i < data.length; i++) {
+					var html = '';
 					html +=
 						`<div id="taskDiv${data[i].task_ID}">` +
-							`<button id="${data[i].task_ID}"  class="btn_visibility testing${data[i].task_ID} w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>` +
+							`<button id="${data[i].task_ID}" class="btn_visibility w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>` +
 								`<div id="PendingTask${data[i].task_ID}" class=" w3-container" style="display: none">` +
 								`<h4 style="text-align: center;">Task ${data[i].task_ID}</h4>` +
 								`<p>Bldg: ${data[i].Building} </p>` +
 								`<p>Floor: ${data[i].Floor}</p>` +
 								`<p>Restroom: ${data[i].Restroom}</p>` +
+								`<p class="p_cleaner"></p>` +
 								`<div class="actions_group" style="text-align: center;">` +
 								`<h5>Accept Task?</h5>` +
 								`<button id="${data[i].task_ID}" class="btn_action">Accept</button>` +
@@ -155,16 +173,18 @@
 			dataType: 'json',
 			success: function (data) {
 
-				var html = "";
+				
 				for (var i = 0; i < data.length; i++) {
+					var html = '';
 					html +=
 					`<div id="taskDiv${data[i].task_ID}">`+
-						`<button onclick="myFunction('onGoingTask${data[i].task_ID}')" class="w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>`+
-						`<div id="onGoingTask${data[i].task_ID}" class="w3-container">`+
+						`<button id="${data[i].task_ID}" class="btn_visibility w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>`+
+						`<div id="onGoingTask${data[i].task_ID}" class="w3-container" style="display: none">`+
 							`<h4 style="text-align: center;">Task ${data[i].task_ID}</h4>`+
 							`<p>Bldg: ${data[i].Building} </p>` +
 							`<p>Floor: ${data[i].Floor}</p>` +
 							`<p>Restroom: ${data[i].Restroom}</p>` +
+							`<p class="p_cleaner">Cleaner: ${data[i].Full_Name}</p>` +
 							`<br>`+
 							`<div style="text-align: center;">`+
 								`<button id="${data[i].task_ID}" class="btn_action" style="width: 30%;">Complete</button>`+
@@ -189,15 +209,17 @@
 			url: '<?= base_url('index.php/Task/completedTask') ?>',
 			dataType: 'json',
 			success: function (data) {
-				var html = "";
+				
 				for (var i = 0; i < data.length; i++) {
+					var html = '';
 					html +=
-					`<button onclick="myFunction('CompletedTask${data[i].task_ID}')" class="w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>`+
-					`<div id="CompletedTask${data[i].task_ID}" class="w3-container w3-hide">`+
+					`<button id="${data[i].task_ID}" class="btn_visibility w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>`+
+					`<div id="CompletedTask${data[i].task_ID}" class="w3-container" style="display: none">`+
 						`<h4 style="text-align: center;">Task ${data[i].task_ID}</h4>`+
 						`<p>Bldg: ${data[i].Building} </p>` +
 						`<p>Floor: ${data[i].Floor}</p>` +
 						`<p>Restroom: ${data[i].Restroom}</p>` +
+						`<p class="p_cleaner">Completed by: ${data[i].Full_Name}</p>` +
 						`<div style="text-align: center;">`+
 							`<button id="btn_completed" style="width: 30%;" style="cursor: default;">Status: Completed</button>`+
 						`</div>`+
@@ -233,11 +255,20 @@
 			'<button id="btn_completed" style="width: 30%;">Status: Completed</button>' +
 			'</div>';
 
+		var html_cleaner =
+			'<p class="p_cleaner"> Cleaner: ' + global_full_name + '</p>'
+
+		var html_completed_by = 
+			'<p class="p_cleaner"> Completed by: ' + global_full_name + '</p>'
+
 		console.log($(this).attr('id'))
 
 		// from pending to ongoing
 		if (($(this).closest('#taskDiv' + $(this).attr('id')).children('div').attr('id')) == `PendingTask${this.id}`) {
 			console.log('pending task accepted')
+
+			$(this).parent().siblings('.p_cleaner').html(html_cleaner)
+
 			$('#Demo2').append($(this).closest('#taskDiv' + $(this).attr('id')))
 			$(this).closest('#PendingTask' + $(this).attr('id')).attr('id', 'onGoingTask' + $(this).attr('id'))
 			$(this).closest('div').replaceWith(html_ongoing)
@@ -249,14 +280,22 @@
 		if (($(this).closest('#taskDiv' + $(this).attr('id')).children('div').attr('id')) == `onGoingTask${this.id}`) {
 
 			console.log('ongoing task')
+
+			$(this).parent().siblings('.p_cleaner').html(html_completed_by)
+
 			$('#Demo3').append($(this).closest('#taskDiv' + $(this).attr('id')))
 			$(this).closest('#onGoingTask' + $(this).attr('id')).attr('id', 'CompletedTask' + $(this).attr('id'))
 
+			// console.log($(this).parent().siblings('.p_cleaner').html())
+
+
 			// $(this).closest('.btn_visibility').attr('onclick',`myFunction(onGoingTask${this.id})`)
 			$(this).closest('.btn_visibility').remove()
-			$(this).prepend(`<button id="${this.id}" onclick="myFunction('onGoingTask${this.id}')" class="w3-btn w3-block w3-black w3-left-align">Task ${data[i].task_ID}</button>`)
+			$(this).prepend(`<button id="${this.id}" onclick="myFunction('onGoingTask${this.id}')" class="w3-btn w3-block w3-black w3-left-align">Task ${this.id}</button>`)
 
 			$(this).closest('div').replaceWith(html_completed)
+			
+			
 			complete_task($(this).attr('id'));
 		}
 
