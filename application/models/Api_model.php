@@ -7,7 +7,7 @@ class api_model extends CI_Model
         $this->db->update('device', $data);
     }
     function getVal() {
-        $this->db->select('ID, Sensor_value');
+        $this->db->select('*');
         $query = $this->db->get('device');
         return $query->row_array();
     }
