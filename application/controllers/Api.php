@@ -45,7 +45,13 @@ class Api extends CI_Controller {
 		// if ($api_key_value == $api_key){
 		// }
 		$data['Sensor_Name'] = $this->input->post('Sensor_Name');
-		$data['Sensor_Location'] = $this->input->post('Sensor_Location');
+		// $data['Sensor_Location'] = $this->input->post('Sensor_Location');
+		// $data['Building'] = $this->input->post('Building');
+		// $data['Floor'] = $this->input->post('Floor');
+		// $data['Restroom'] = $this->input->post('Restroom');
+		$data['Building'] = "GD3";
+		$data['Floor'] = "4th";
+		$data['Restroom'] = "Men";
 		$data['Sensor_Value'] = $this->input->post('Sensor_Value');
 		$data['Timestamp'] = date("Y-m-d h:i:s");
 		$this->api_model->updateValue($data);
@@ -81,6 +87,33 @@ class Api extends CI_Controller {
 		// echo $result["Sensor_value"];
 		echo json_encode($result);
 	}	
+	public function createTask() {
+
+		$data['Device_ID'] = $this->input->post('Device_ID');
+		$data['Building'] = $this->input->post('Building');
+		$data['Floor'] = $this->input->post('Floor');
+		$data['Restroom'] = $this->input->post('Restroom');
+		$data['Status'] = $this->input->post('Status');
+		$data['User_ID'] = $this->input->post('User_ID');
+
+		$result = $this->api_model->createTask($data);
+
+		echo json_encode($result);
+	}
+
+	public function updateStatus() {
+		//$this->api_model->updateStatus($data);
+
+		$id = $this->input->post('ID');
+		// $data['Status'] = $this->input->post('Status');
+		$status = array(
+			'Status' => $this->input->post('Status')
+		);
+
+		$result = $this->api_model->updateStatusModel($id, $status);
+
+		echo json_encode($result);
+	}
 
 	public function send_sms()
 	{

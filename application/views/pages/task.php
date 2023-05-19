@@ -348,11 +348,12 @@
 		})
 	}
 
-	function complete_task($task_ID) {
+	function complete_task($task_ID, $Device_ID) {
 		$.ajax({
 			url: '<?= base_url('index.php/Task/completeOT') ?>',
 			data: {
 				id:$task_ID,
+				device_id: $Device_ID
 			},
 			dataType: 'json',
 			method: 'post',

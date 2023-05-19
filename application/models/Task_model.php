@@ -56,6 +56,19 @@ class Task_model extends CI_Model
         $query = $this->db->get();;
         return $query->result_array();
     }
+    public function completedTaskDevice($device_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tasks AS a');
+
+        $this->db->join('device as b', 'b.Device_ID = a.ID', 'left');
+
+        $this->db->where('a.Status', 'Completed');
+        $this->db->where('b.Device_ID', $device_id);
+
+        $query = $this->db->get();;
+        return $query->result_array();
+    }
 
     public function updateStatus($id, $data)
     {
@@ -63,9 +76,9 @@ class Task_model extends CI_Model
         // $this->db->where('User_ID', $data['User_ID']);
         $this->db->update('tasks', $data);
     }
-    public function updateStatusDevice($data)
+    public function updateStatusDevice($id, $data)
     {
-        $this->db->where('Status', $data);
+        $this->db->where('ID', $id);
         // $this->db->where('User_ID', $data['User_ID']);
         $this->db->update('device', $data);
     }

@@ -7,16 +7,20 @@ let task = false;
 // let snooze = 10000;
 // let snooze = 3000;
 let snooze = 3;
-
+let id;
 let marginOfError = 5;
-let threshold = 4;
+let threshold = 3;
 let intervals = 10;
 let newValue = 0;
 let values = [];
 let counter = 0;
 let once = false;
 
-let status = "Completed";
+let building;
+let floor;
+let restroom;
+
+//let status = "Completed";
 let i = 1;
 
 function getRandomInt(max) {
@@ -25,23 +29,28 @@ function getRandomInt(max) {
 
         setInterval(function () {
 
-            // $.ajax({
-            //     url: "<?=base_url().'index.php/api/newTask2'?>",
-            //     method:'post',
-            //     data:{},
-            //     dataType:'json',
-            //     success:function(data){
-            //         //status = data["Status"]
-            //         //values.push(parseFloat(data["Sensor_Value"]))
-            //         newValue = parseFloat(data["Sensor_Value"])
-            //     },
-            //     error:function(err){
-            //     console.log(err)
-            //     }
-            // });
-            // $("body").append("<br> start </br>")
+            $.ajax({
+                url: "<?=base_url().'index.php/api/newTask2'?>",
+                method:'post',
+                data:{},
+                dataType:'json',
+                success:function(data){
+                    // console.log(data)
+                    status = data["Status"]
+                    //values.push(parseFloat(data["Sensor_Value"]))
+                    id = data["ID"]
+                    building = data["Building"]
+                    floor = data["Floor"]
+                    restroom = data["Restroom"]
+                    newValue = parseFloat(data["Sensor_Value"])
+                },
+                error:function(err){
+                console.log(err)
+                }
+            });
+            // $("body").prepend("<br> start </br>")
 
-            newValue = getRandomInt(5 + 1);
+            //newValue = getRandomInt(5 + 1);
 
             if (status == "Completed") {
                 
@@ -55,38 +64,88 @@ function getRandomInt(max) {
                     //     once = true;
                         
                     // }, snooze)
-                    $("body").append("<br>" + i)
+                    $("body").prepend("<br>" + i + "<br>")
                     i++;
                 } else {
                     if (counter >= marginOfError) {
                         counter = 0;
                         values = [];
-                        $("body").append("<br>")
-                        $("body").append("Counter: "+ counter +" values: "+ values.toString())
-                        $("body").append("<br>")
+                        $("body").prepend("<br>")
+                        $("body").prepend("Counter: "+ counter +" values: "+ values.toString())
+                        $("body").prepend("<br>")
                     } else if (values.length < intervals){
                         if (newValue < threshold) {
                             counter++;
-                            values.push(newValue);
+                            values.push(newValue);      
+                        console.log('di pa pending')     
                         } else {
                             values.push(newValue);
                         }
-                        $("body").append("<br>")
-                        $("body").append("Counter: "+ counter +" values: "+ values.toString())
-                        $("body").append("<br>")
+                        $("body").prepend("<br>")
+                        $("body").prepend("Counter: "+ counter +" values: "+ values.toString())
+                        $("body").prepend("<br>")
                     } else if (values.length >= intervals) {
-                        status = "Pending";                      
-                        $("body").append("<br>")
-                        $("body").append("New task created, status " + status)
-                        $("body").append("<br>")                     
+                        // status = "Pending";
+                        values = [];                           
+                        console.log('pending na ulet')     
+                        $("body").prepend("<br>")
+                        $("body").prepend("New task created, status " + status)
+                        $("body").prepend("<br>")     
+                        
+                        $.ajax({
+                            url: "<?=base_url().'index.php/api/updateStatus'?>",
+                            method:'post',
+                            data:{
+                                ID: id,
+                                Status: 'Pending'
+                            },
+                            dataType:'json',
+                            success:function(data){
+                                $("body").prepend("<br>")
+                                $("body").prepend("Status Updated to: " + status)
+                                $("body").prepend("<br>")       
+                                console.log('nag update')          
+                                
+                            },
+                            error:function(err){
+                                console.log(err)
+                                $("body").prepend("<br>")
+                                $("body").prepend("error: " + err)
+                                $("body").prepend("<br>") 
+                            }
+                        });
+                        $.ajax({
+                            url: "<?=base_url().'index.php/api/createTask'?>",
+                            method:'post',
+                            data:{
+                                Device_ID: id,                            
+                                Building: building,
+                                Floor: floor,
+                                Restroom: restroom,
+                                Status: 'Pending',
+                                User_ID: 0
+                            },
+                            dataType:'json',
+                            success:function(data){
+                                $("body").prepend("<br>")
+                                $("body").prepend("New task Created")
+                                $("body").prepend("<br>")  
+                            },
+                            error:function(err){
+                                console.log(err)
+                                $("body").prepend("<br>")
+                                $("body").prepend("error: " + err)
+                                $("body").prepend("<br>") 
+                            }
+                        });
                     }
                 }             
             } else {              
                 once = false
                 i = 1;
                 counter = 0;
-                $("body").append("<br>")
-                $("body").append("status "+ status)
+                $("body").prepend("<br>")
+                $("body").prepend("status "+ status)
             }
 
             // if (values.length > 5) {
@@ -99,22 +158,22 @@ function getRandomInt(max) {
             //     if (!task) {
             //         task = !task
 
-            //         $("body").append("<br>")
-            //         $("body").append("Average greater than 3. Creating new task")
-            //         $("body").append("<br>")
-            //         $("body").append("<br>")
-            //         $("body").append("NEW TASK - "+" average: " + average.toFixed(2) +" values: "+ values.toString())
-            //         $("body").append("<br>")
+            //         $("body").prepend("<br>")
+            //         $("body").prepend("Average greater than 3. Creating new task")
+            //         $("body").prepend("<br>")
+            //         $("body").prepend("<br>")
+            //         $("body").prepend("NEW TASK - "+" average: " + average.toFixed(2) +" values: "+ values.toString())
+            //         $("body").prepend("<br>")
             //     } else {
-            //         $("body").append("<br>")
-            //         $("body").append("PENDING TASK - " +" average: " + average.toFixed(2) +" values: "+ values.toString())
-            //         $("body").append("<br>")
+            //         $("body").prepend("<br>")
+            //         $("body").prepend("PENDING TASK - " +" average: " + average.toFixed(2) +" values: "+ values.toString())
+            //         $("body").prepend("<br>")
                     
             //     }
                 
             // } else {
-            //     $("body").append("NO TASK - "+" average: " + average.toFixed(2) +" values: "+ values.toString())
-            //     $("body").append("<br>")
+            //     $("body").prepend("NO TASK - "+" average: " + average.toFixed(2) +" values: "+ values.toString())
+            //     $("body").prepend("<br>")
             // }
         }, 1000);
 

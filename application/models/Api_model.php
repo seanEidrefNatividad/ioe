@@ -11,5 +11,12 @@ class api_model extends CI_Model
         $query = $this->db->get('device');
         return $query->row_array();
     }
+    function updateStatusModel($id, $status) {
+        $this->db->where('ID', $id);
+        $this->db->update('device', $status);
+    }
+    function createTask($data) {
+        $this->db->insert('tasks', $data);
+    }
     
 }
