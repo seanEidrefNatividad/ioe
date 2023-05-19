@@ -63,4 +63,27 @@ class Task_model extends CI_Model
         // $this->db->where('User_ID', $data['User_ID']);
         $this->db->update('tasks', $data);
     }
+    public function updateStatusDevice($data)
+    {
+        $this->db->where('Status', $data);
+        // $this->db->where('User_ID', $data['User_ID']);
+        $this->db->update('device', $data);
+    }
+    public function taskAnalytics()
+    {
+        $this->db->select('count(a.`Status`) as Completed');
+        $this->db->select('b.Full_Name');
+
+        $this->db->from('tasks AS a');
+
+        $this->db->join('users AS b', 'b.ID = a.User_ID', 'left');
+
+        $this->db->where('a.`Status`', 'Completed');
+
+        $this->db->group_by('b.Full_Name');
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
+

@@ -51,7 +51,7 @@ class Task extends CI_Controller {
 		$id = $this->input->post('id');
 		$data['User_ID'] = $this->session->id;
 		$data['Status'] = 'Completed';
-		// $this->Task_model->updateStatus($id, $data);
+		$this->Task_model->updateStatus($id, $data);
 
 		echo json_encode($data);
 	}
@@ -60,6 +60,15 @@ class Task extends CI_Controller {
 		$user_id = $this->session->id;
 		$data = $this->Task_model->completedTask($user_id);
 		echo json_encode($data);
+	}
+	public function getChartDataTask()
+	{
+		$data1['status'] = $this->input->post('Status');
+		$data1['name'] = $this->input->post('Full_Name');
+
+		$completed_task = $this->Task_model->taskAnalytics($data1);
+
+		echo json_encode($completed_task);
 	}
 	
 }
