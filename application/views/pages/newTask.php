@@ -2,7 +2,7 @@
 
 //let values = [1, 2, 3, 4];
 let task = false;
-// let status = "";
+let status = "Completed";
 //let statusArray = ["Pending", "OnGoing", "Completed"];
 // let snooze = 10000;
 // let snooze = 3000;

@@ -44,16 +44,28 @@ class Api extends CI_Controller {
 		$api_key = $this->input->post('api_key');
 		// if ($api_key_value == $api_key){
 		// }
-		$data['Sensor_Name'] = $this->input->post('Sensor_Name');
+		// $data['Sensor_Name'] = $this->input->post('Sensor_Name');
 		// $data['Sensor_Location'] = $this->input->post('Sensor_Location');
 		// $data['Building'] = $this->input->post('Building');
 		// $data['Floor'] = $this->input->post('Floor');
 		// $data['Restroom'] = $this->input->post('Restroom');
-		$data['Building'] = "GD3";
-		$data['Floor'] = "4th";
-		$data['Restroom'] = "Men";
-		$data['Sensor_Value'] = $this->input->post('Sensor_Value');
-		$data['Timestamp'] = date("Y-m-d h:i:s");
+		// $data['Building'] = "GD3";
+		// $data['Floor'] = "4th";
+		// $data['Restroom'] = "Men";
+		// $data['Sensor_Value'] = $this->input->post('Sensor_Value');
+		// $data['Timestamp'] = date("Y-m-d h:i:s");
+
+		$result = $this->api_model->getVal();
+
+		$data = array(
+			'Sensor_Name' => $this->input->post('Sensor_Name'),
+			'Building' => "GD3",
+			'Floor' => "4th",
+			'Restroom' => "Men",
+			'Status' => $result['Status'],
+			'Sensor_Value' => $this->input->post('Sensor_Value'),
+			'Timestamp' => date("Y-m-d h:i:s")
+		);
 		$this->api_model->updateValue($data);
 
 		echo json_encode($data);
