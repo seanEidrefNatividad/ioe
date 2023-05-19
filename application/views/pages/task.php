@@ -310,6 +310,7 @@
 			'</div>'
 
 		console.log('cancelled task')
+		$(this).parent().siblings('.p_cleaner').text('');
 		$('#Demo1').append($(this).closest('#taskDiv' + $(this).attr('id')))
 		$(this).closest('#onGoingTask' + $(this).attr('id')).attr('id', 'PendingTask' + $(this).attr('id'))
 
