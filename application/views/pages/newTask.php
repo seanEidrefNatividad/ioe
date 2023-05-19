@@ -27,6 +27,22 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+function send_sms(){
+    $.ajax({
+        url: "<?=base_url().'index.php/api/send_sms'?>",
+        method:'post',
+        data:{
+            message: 'A new task has been added. Please go to the S[c]entinel dashboard or refer to the link provided. Have a great day! https://stdominiccollege.edu.ph/scentinel/index.php/'
+        },
+        dataType:'json',
+        success:function(data){
+        },
+        error:function(err){
+        console.log(err)
+        }
+    });
+}
+
         setInterval(function () {
 
             $.ajax({
@@ -130,6 +146,7 @@ function getRandomInt(max) {
                                 $("body").prepend("<br>")
                                 $("body").prepend("New task Created")
                                 $("body").prepend("<br>")  
+                                send_sms();
                             },
                             error:function(err){
                                 console.log(err)
@@ -177,5 +194,7 @@ function getRandomInt(max) {
             // }
         }, 1000);
 
+
+        
 
 </script>

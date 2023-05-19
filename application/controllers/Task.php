@@ -49,11 +49,13 @@ class Task extends CI_Controller {
 	}
 	public function completeOT(){
 		$id = $this->input->post('id');
-		// $device_id = $this->input->post('device_id');
+		$device_id = $this->input->post('device_id');
 		$data['User_ID'] = $this->session->id;
-		$data['Status'] = 'Completed';
-		$this->Task_model->updateStatus($id, $data);
-		// $this->Task_model->updateStatusDevice($device_id, $data);
+		$status = array(
+			'Status' => 'Completed'
+		);
+		$this->Task_model->updateStatus($id, $status);
+		$this->Task_model->updateStatusDevice($device_id, $status);
 
 		echo json_encode($data);
 	}

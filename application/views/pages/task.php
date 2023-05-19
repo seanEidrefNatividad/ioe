@@ -290,7 +290,7 @@
 			$(this).closest('div').replaceWith(html_completed)
 			
 			
-			complete_task($(this).attr('id'));
+			complete_task($(this).attr('id'), '1');
 		}
 
 		// add if for parent id to differentiate

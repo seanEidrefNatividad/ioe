@@ -115,17 +115,25 @@ class Api extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function send_sms()
+	public function send_sms(){
+		$message = $this->input->post('message');
+		$numbers = array('09186194512', '09177864991', '09951047040', '09288596766');
+		foreach ($numbers as $key => $value) {
+			$this->build_sms($value, $message);
+		}
+	}
+
+	public function build_sms($number, $message)
 	{
-		$destination = "09177864991";
-		$text = "message";
+		// $destination = "09177864991";
+		// $text = "message";
 		
 
 		$fields = array(
 
-			'mobile_number'=>urlencode($destination),
+			'mobile_number'=>urlencode($number),
 
-			'message'=>urlencode($text)
+			'message'=>urlencode($message)
 
 		);
 		
