@@ -33,7 +33,7 @@ function getRandomInt(max) {
             //     success:function(data){
             //         //status = data["Status"]
             //         //values.push(parseFloat(data["Sensor_Value"]))
-            //         //newValue = parseFloat(data["Sensor_Value"])
+            //         newValue = parseFloat(data["Sensor_Value"])
             //     },
             //     error:function(err){
             //     console.log(err)
@@ -48,7 +48,7 @@ function getRandomInt(max) {
                 
                 if(!once){
                     if (i >= snooze) {
-                        once = true;
+                        once = true;                      
                     }
                     
                     // setInterval(function () {
@@ -75,15 +75,18 @@ function getRandomInt(max) {
                         $("body").append("Counter: "+ counter +" values: "+ values.toString())
                         $("body").append("<br>")
                     } else if (values.length >= intervals) {
+                        status = "Pending";                      
                         $("body").append("<br>")
-                        $("body").append("New task created, status pending")
-                        $("body").append("<br>")
-                        status = "Pending";
+                        $("body").append("New task created, status " + status)
+                        $("body").append("<br>")                     
                     }
                 }             
-            } else {
+            } else {              
+                once = false
+                i = 1;
+                counter = 0;
                 $("body").append("<br>")
-                $("body").append("status pending")
+                $("body").append("status "+ status)
             }
 
             // if (values.length > 5) {
