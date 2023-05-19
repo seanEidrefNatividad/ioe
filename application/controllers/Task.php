@@ -10,6 +10,14 @@ class Task extends CI_Controller {
 		$this->load->model('Task_model');
 	}
 
+	public function getProfile()
+	{
+		$user_id = $this->session->id;
+		$data = $this->Task_model->getProfile($user_id);
+
+		echo json_encode($data);
+	}
+
     public function pendingTask()
     {
 		// $user_id = $this->session->id;
@@ -41,11 +49,11 @@ class Task extends CI_Controller {
 	}
 	public function completeOT(){
 		$id = $this->input->post('id');
-		$data['User_ID'] = $this->input->post('User_ID');
+		$data['User_ID'] = $this->session->id;
 		$data['Status'] = 'Completed';
-		$this->Task_model->updateStatus($id, $data);
+		// $this->Task_model->updateStatus($id, $data);
 
-		echo json_encode(1);
+		echo json_encode($data);
 	}
 	public function completedTask()
 	{
@@ -53,4 +61,5 @@ class Task extends CI_Controller {
 		$data = $this->Task_model->completedTask($user_id);
 		echo json_encode($data);
 	}
+	
 }
