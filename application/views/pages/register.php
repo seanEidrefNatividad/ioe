@@ -7,7 +7,7 @@
 		<img id="logo" src="<?= base_url(); ?>images/scentinelLogo.jpg" alt="Logo" style="margin: 0;"><span id="logoName">&nbsp;Scentinel</span>
 	</div>
 	<h2 id="loginHeader">Create your account</h2>
-	<p id="registerLink">Have an account? <a href="<?= base_url() . 'index.php/login' ?>">Login in now</a> </p>
+	<p id="registerLink">Have an account? <a href="<?= base_url() . 'index.php/login' ?>">Log in now</a> </p>
 
 
     <label class="lbl_register" for="email">First name</label>
