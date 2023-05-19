@@ -5,7 +5,8 @@ let task = false;
 // let status = "";
 //let statusArray = ["Pending", "OnGoing", "Completed"];
 // let snooze = 10000;
-let snooze = 3000;
+// let snooze = 3000;
+let snooze = 3;
 
 let marginOfError = 5;
 let threshold = 4;
@@ -16,7 +17,7 @@ let counter = 0;
 let once = false;
 
 let status = "Completed";
-let i = 0;
+let i = 1;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -46,11 +47,14 @@ function getRandomInt(max) {
                 
                 
                 if(!once){
-                    
-                    setInterval(function () {
+                    if (i >= snooze) {
                         once = true;
+                    }
+                    
+                    // setInterval(function () {
+                    //     once = true;
                         
-                    }, snooze)
+                    // }, snooze)
                     $("body").append("<br>" + i)
                     i++;
                 } else {
