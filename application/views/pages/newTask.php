@@ -4,8 +4,9 @@ let values = [1, 2, 3, 4];
 let task = false;
 
         setInterval(function () {
+
             $.ajax({
-                url: "<?=base_url().'api/newTask2'?>",
+                url: "<?=base_url().'index.php/api/newTask2'?>",
                 method:'post',
                 data:{},
                 dataType:'json',
