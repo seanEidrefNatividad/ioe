@@ -37,6 +37,28 @@
     color: #016bf8;
 }
 
+@media (max-width: 4000px) {
+
+    .pageText {
+        display:inline-block;
+    }
+    .pageIcons {
+        display:none;
+    }
+}
+
+@media (max-width: 767px) {
+    .pageText {
+        display:none;
+    }
+    .pageIcons {
+        display:inline-block;
+    }
+    .btn_sidebarNav {
+        text-align: center;
+    }
+}
+
 
 
 

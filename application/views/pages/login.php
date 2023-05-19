@@ -6,16 +6,17 @@
 	<p id="registerLink">Don't have an account? <a href="<?= base_url() . 'index.php/register' ?>">Sign Up</a> </p>
 
 	<div class="">
-		<?= $flashdata ?>
+		<div style="width: 90%;">
+			<?= $flashdata ?>
+		</div>
 
 		<?php echo form_open(base_url() . 'index.php/login'); ?>
 		<div class="">
 			<label class="lbl_login" for="email">Email Address</label>
-			<input class="tb_login" type="email" id="email" name="email" placeholder="email" autocomplete="off"
-				value="<?= set_value('email'); ?>" maxlength="50" required>
+			<input class="tb_login" type="email" id="email" name="email" autocomplete="off" value="<?= set_value('email'); ?>" maxlength="50" required>
 
 			<label class="lbl_login" for="password">Password</label>
-			<input class="tb_login" type="password" id="password" name="password" placeholder="Password"
+			<input class="tb_login" type="password" id="password" name="password"
 				autocomplete="off" required>
 
 			<button id="btn_login" class="btn btn-success" type="submit" name="submit">Log In</button>
