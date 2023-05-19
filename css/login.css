@@ -1,0 +1,95 @@
+#loginDiv {
+    height: 100vh;
+    background-color: #fff;
+
+}
+.lbl_login {
+    font-size: .85rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #4c5d65;
+}
+
+#btn_login {
+    margin-top: 80px;
+    padding: .5rem 1.25rem;
+    font-size: 1.15rem;
+}
+
+.tb_login {
+    border: 1px solid #dddfe2;
+    outline: none;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    display: block;
+}
+
+.tb_login:focus {
+    border: 1.5px solid rgb(58, 119, 252);
+}
+
+
+
+#loginHeader {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+    margin: 0;
+    color: #00684a;
+}
+#registerLink {
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+#registerLink a {
+    color: #016bf8;
+}
+
+#loginDiv2 {
+    background-color: red;
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+}
+
+@media (max-width: 4000px) {
+
+    #loginDiv2 {
+        margin-left: 385px;
+    }
+    #loginDiv {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 385px;
+        padding: 50px 0 50px 42px;
+    }
+    .tb_login {
+        width: 300px;
+        height: 40px;
+        padding: 14px 16px;
+    }
+    
+}
+
+@media (max-width: 767px) {
+    #loginDiv {
+        margin-top: 60px;
+        width: 100%
+    }
+    #loginDiv2 {
+        margin-left: 0;
+    }
+    
+    .tb_login {
+        width: 90%;
+        height: 40px;
+        padding: 1rem 1.25rem;
+    }
+    #btn_login {
+        margin-top: 80px;
+        padding: .5rem 1.25rem;
+        font-size: 1.15rem;
+        width: 90%;
+    }
+}
