@@ -44,10 +44,28 @@ class Api extends CI_Controller {
 		$api_key = $this->input->post('api_key');
 		// if ($api_key_value == $api_key){
 		// }
-		$data['Sensor_Name'] = $this->input->post('Sensor_Name');
-		$data['Sensor_Location'] = $this->input->post('Sensor_Location');
-		$data['Sensor_Value'] = $this->input->post('Sensor_Value');
-		$data['Timestamp'] = date("Y-m-d h:i:s");
+		// $data['Sensor_Name'] = $this->input->post('Sensor_Name');
+		// $data['Sensor_Location'] = $this->input->post('Sensor_Location');
+		// $data['Building'] = $this->input->post('Building');
+		// $data['Floor'] = $this->input->post('Floor');
+		// $data['Restroom'] = $this->input->post('Restroom');
+		// $data['Building'] = "GD3";
+		// $data['Floor'] = "4th";
+		// $data['Restroom'] = "Men";
+		// $data['Sensor_Value'] = $this->input->post('Sensor_Value');
+		// $data['Timestamp'] = date("Y-m-d h:i:s");
+
+		$result = $this->api_model->getVal();
+
+		$data = array(
+			'Sensor_Name' => $this->input->post('Sensor_Name'),
+			'Building' => "GD3",
+			'Floor' => "4th",
+			'Restroom' => "Men",
+			'Status' => $result['Status'],
+			'Sensor_Value' => $this->input->post('Sensor_Value'),
+			'Timestamp' => date("Y-m-d h:i:s")
+		);
 		$this->api_model->updateValue($data);
 
 		echo json_encode($data);
@@ -78,21 +96,56 @@ class Api extends CI_Controller {
 	public function newTask2() {
 
 		$result = $this->api_model->getVal();	
-		echo $result["Sensor_value"];
-		return json_encode($result["Sensor_value"]);
+		// echo $result["Sensor_value"];
+		echo json_encode($result);
 	}	
+	public function createTask() {
 
-	public function send_sms()
+		$data['Device_ID'] = $this->input->post('Device_ID');
+		$data['Building'] = $this->input->post('Building');
+		$data['Floor'] = $this->input->post('Floor');
+		$data['Restroom'] = $this->input->post('Restroom');
+		$data['Status'] = $this->input->post('Status');
+		$data['User_ID'] = $this->input->post('User_ID');
+
+		$result = $this->api_model->createTask($data);
+
+		echo json_encode($result);
+	}
+
+	public function updateStatus() {
+		//$this->api_model->updateStatus($data);
+
+		$id = $this->input->post('ID');
+		// $data['Status'] = $this->input->post('Status');
+		$status = array(
+			'Status' => $this->input->post('Status')
+		);
+
+		$result = $this->api_model->updateStatusModel($id, $status);
+
+		echo json_encode($result);
+	}
+
+	public function send_sms(){
+		$message = $this->input->post('message');
+		$numbers = array('09186194512', '09177864991', '09951047040', '09288596766');
+		foreach ($numbers as $key => $value) {
+			$this->build_sms($value, $message);
+		}
+	}
+
+	public function build_sms($number, $message)
 	{
-		$destination = "09177864991";
-		$text = "message";
+		// $destination = "09177864991";
+		// $text = "message";
 		
 
 		$fields = array(
 
-			'mobile_number'=>urlencode($destination),
+			'mobile_number'=>urlencode($number),
 
-			'message'=>urlencode($text)
+			'message'=>urlencode($message)
 
 		);
 		
