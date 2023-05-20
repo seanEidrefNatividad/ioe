@@ -42,20 +42,19 @@
 
 			// this.BSIT_gwa = [];
 		}
-		async getChartDataTask(name) {
+		async getChartDataTask(id) {
 			return new Promise((resolve, reject) => {
 				$.ajax({
 					url: "<?= base_url('index.php/Task/getChartDataTask') ?>",
 					method: "post",
 					data: {
-						Status: status,
-						Full_Name: name
+						task_ID: id
 						// schoolyear: schoolyear
 						// semester: semester
 					},
 					dataType: 'json',
-					success: function ($name) {
-						resolve($name);
+					success: function ($id) {
+						resolve($id);
 					},
 					error: function ($err) {
 

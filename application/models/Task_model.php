@@ -78,9 +78,10 @@ class Task_model extends CI_Model
 
         $this->db->join('users AS b', 'b.ID = a.User_ID', 'left');
 
-        $this->db->where('a.task_ID', $data1['id']);
+        $this->db->where('a.User_ID', $data1['id']);
+        $this->db->where('a.Status', 'Completed');
 
-        $this->db->group_by('b.Full_Name');
+        // $this->db->group_by('b.ID');
 
         $query = $this->db->get();
         return $query->result_array();
