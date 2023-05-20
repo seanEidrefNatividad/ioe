@@ -69,7 +69,7 @@ class Task_model extends CI_Model
         // $this->db->where('User_ID', $data['User_ID']);
         $this->db->update('device', $data);
     }
-    public function taskAnalytics()
+    public function taskAnalytics($data1)
     {
         $this->db->select('count(a.`Status`) as Completed');
         $this->db->select('b.Full_Name');
@@ -78,7 +78,7 @@ class Task_model extends CI_Model
 
         $this->db->join('users AS b', 'b.ID = a.User_ID', 'left');
 
-        $this->db->where('a.`Status`', 'Completed');
+        $this->db->where('a.task_ID', $data1['id']);
 
         $this->db->group_by('b.Full_Name');
 

@@ -66,27 +66,27 @@
 		}
 		async renderData() {
 			// (async()=>{
-			var ben_data = await this.getChartDataTask('Benedict Abrenica');
-			var sean_data = await this.getChartDataTask('Sean Natividad');
-			var adam_data = await this.getChartDataTask('Adam Delos Reyes');
-			var niel_data = await this.getChartDataTask('Niel Sarmiento');
-			var jubs_data = await this.getChartDataTask('Jubs Flores');
+			var ben_data = await this.getChartDataTask(6);
+			var sean_data = await this.getChartDataTask(4);
+			var adam_data = await this.getChartDataTask(7);
+			var niel_data = await this.getChartDataTask(9);
+			var jubs_data = await this.getChartDataTask(8);
 
 
 			this.Ben = ben_data.map(data => {
-				return { x: 1, y: parseFloat(data.Completed), label: data.Full_Name };
+				return { label: data.Full_Name, y: parseInt(data.Completed)  };
 			});
 			this.Sean = sean_data.map(data => {
-				return { x: 2, y: parseFloat(data.Completed), label: data.Full_Name };
+				return { label: data.Full_Name, y: parseInt(data.Completed)  };
 			});
 			this.Adam = adam_data.map(data => {
-				return { x: 3, y: parseFloat(data.Completed), label: data.Full_Name };
+				return { label: data.Full_Name, y: parseInt(data.Completed)  };
 			});
 			this.Niel = niel_data.map(data => {
-				return { x: 4, y: parseFloat(data.Completed), label: data.Full_Name };
+				return { label: data.Full_Name, y: parseInt(data.Completed)  };
 			});
 			this.Jubs = jubs_data.map(data => {
-				return { x: 5, y: parseFloat(data.Completed), label: data.Full_Name };
+				return { label: data.Full_Name, y: parseInt(data.Completed)  };
 			});
 		}
 		async renderTask() {

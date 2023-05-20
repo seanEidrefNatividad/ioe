@@ -65,6 +65,7 @@ class Task extends CI_Controller {
 	{
 		$data1['status'] = $this->input->post('Status');
 		$data1['name'] = $this->input->post('Full_Name');
+		$data1['id'] = $this->input->post('task_ID');
 
 		$completed_task = $this->Task_model->taskAnalytics($data1);
 
