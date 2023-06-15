@@ -16,6 +16,10 @@ class Home extends CI_Controller
             switch($page) {
                 case "profile":
                     //do something
+                    $data['userData'] = $this->Home_model->get_userData_single_with_ID($this->session->id);
+                    // print_r($data['userData']);
+                    // echo 'hello';
+                    // exit;
                     break;
                 case "analytics":
                     //do something, get database

@@ -23,6 +23,12 @@ class Home_model extends CI_Model
 
         
     }
+    public function get_userData_single_with_ID($ID)
+    {
+        $this->db->where('ID', $ID);
+        $query = $this->db->get('users');
+        return $query->row_array();
+    }
     public function register()
     {
         $firstName = $this->input->post('firstName');
